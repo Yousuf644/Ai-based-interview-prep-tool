@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InterviewAI — Interview Setup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/setup.css">
+</head>
+<body>
+<div class="ambient a1"></div>
+<div class="ambient a2"></div>
+
+<nav>
+  <a class="nav-logo" href="dashboard.html">
+    <div class="logo-mark">AI</div>
+    <span class="logo-text">Interview<span>AI</span></span>
+  </a>
+  <a class="btn-back" href="dashboard.html">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+    Dashboard
+  </a>
+</nav>
+
+<!-- STEPPER -->
+<div class="stepper-wrap">
+  <div class="stepper" id="stepper">
+    <div class="step active" id="st-1"><div class="step-num">1</div><div class="step-label">Role</div></div>
+    <div class="step-line" id="sl-1"></div>
+    <div class="step" id="st-2"><div class="step-num">2</div><div class="step-label">Level</div></div>
+    <div class="step-line" id="sl-2"></div>
+    <div class="step" id="st-3"><div class="step-num">3</div><div class="step-label">Skills</div></div>
+    <div class="step-line" id="sl-3"></div>
+    <div class="step" id="st-4"><div class="step-num">4</div><div class="step-label">Preferences</div></div>
+    <div class="step-line" id="sl-4"></div>
+    <div class="step" id="st-5"><div class="step-num">5</div><div class="step-label">Review</div></div>
+  </div>
+</div>
+
+<main>
+
+  <!-- STEP 1: ROLE -->
+  <div class="panel active" id="panel-1">
+    <div class="panel-head">
+      <div class="panel-eyebrow">Step 1 of 5</div>
+      <h2 class="panel-title">What role are you targeting?</h2>
+      <p class="panel-sub">Choose the job role you're preparing for. AI will tailor questions to match industry expectations.</p>
+    </div>
+    <div class="role-grid">
+      <div class="role-card" onclick="pickRole(this,'Software Engineer')">
+        <div class="role-icon" style="background:rgba(79,127,255,.12)">💻</div>
+        <div class="role-name">Software Engineer</div>
+        <div class="role-desc">DSA, system design, code reviews</div>
+      </div>
+      <div class="role-card" onclick="pickRole(this,'Data Analyst')">
+        <div class="role-icon" style="background:rgba(61,217,197,.12)">📊</div>
+        <div class="role-name">Data Analyst</div>
+        <div class="role-desc">SQL, visualization, stats</div>
+      </div>
+      <div class="role-card" onclick="pickRole(this,'Data Scientist')">
+        <div class="role-icon" style="background:rgba(155,109,255,.12)">🔬</div>
+        <div class="role-name">Data Scientist</div>
+        <div class="role-desc">ML, modelling, Python, stats</div>
+      </div>
+      <div class="role-card" onclick="pickRole(this,'Frontend Developer')">
+        <div class="role-icon" style="background:rgba(245,166,35,.12)">🎨</div>
+        <div class="role-name">Frontend Developer</div>
+        <div class="role-desc">React, CSS, performance, UX</div>
+      </div>
+      <div class="role-card" onclick="pickRole(this,'Backend Developer')">
+        <div class="role-icon" style="background:rgba(46,204,138,.12)">⚙️</div>
+        <div class="role-name">Backend Developer</div>
+        <div class="role-desc">APIs, databases, architecture</div>
+      </div>
+      <div class="role-card" onclick="pickRole(this,'Product Manager')">
+        <div class="role-icon" style="background:rgba(255,95,109,.12)">🧭</div>
+        <div class="role-name">Product Manager</div>
+        <div class="role-desc">Strategy, roadmap, metrics</div>
+      </div>
+      <div class="role-card" onclick="pickRole(this,'DevOps Engineer')">
+        <div class="role-icon" style="background:rgba(79,127,255,.12)">🚀</div>
+        <div class="role-name">DevOps Engineer</div>
+        <div class="role-desc">CI/CD, Docker, Kubernetes</div>
+      </div>
+      <div class="role-card" onclick="pickRole(this,'ML Engineer')">
+        <div class="role-icon" style="background:rgba(155,109,255,.12)">🤖</div>
+        <div class="role-name">ML Engineer</div>
+        <div class="role-desc">MLOps, PyTorch, pipelines</div>
+      </div>
+      <div class="role-card" onclick="pickRole(this,'Full Stack Developer')">
+        <div class="role-icon" style="background:rgba(61,217,197,.12)">🔄</div>
+        <div class="role-name">Full Stack Developer</div>
+        <div class="role-desc">End-to-end web development</div>
+      </div>
+    </div>
+    <div class="nav-btns"><div></div>
+      <button class="btn-next" id="next-1" onclick="goStep(2)" disabled>
+        Continue <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 2: LEVEL -->
+  <div class="panel" id="panel-2">
+    <div class="panel-head">
+      <div class="panel-eyebrow">Step 2 of 5</div>
+      <h2 class="panel-title">Your experience level</h2>
+      <p class="panel-sub">This helps us calibrate question difficulty and depth of expected answers.</p>
+    </div>
+    <div class="level-grid">
+      <div class="level-card" onclick="pickLevel(this,'Fresher','0–1 year',25)">
+        <div class="level-emoji">🌱</div>
+        <div class="level-name">Fresher</div>
+        <div class="level-yrs">0–1 year</div>
+        <div class="level-bar"><div class="level-fill" style="width:25%"></div></div>
+      </div>
+      <div class="level-card" onclick="pickLevel(this,'Junior','1–3 years',50)">
+        <div class="level-emoji">🌿</div>
+        <div class="level-name">Junior</div>
+        <div class="level-yrs">1–3 years</div>
+        <div class="level-bar"><div class="level-fill" style="width:50%"></div></div>
+      </div>
+      <div class="level-card" onclick="pickLevel(this,'Mid-level','3–5 years',75)">
+        <div class="level-emoji">🌳</div>
+        <div class="level-name">Mid-level</div>
+        <div class="level-yrs">3–5 years</div>
+        <div class="level-bar"><div class="level-fill" style="width:75%"></div></div>
+      </div>
+      <div class="level-card" onclick="pickLevel(this,'Senior','6+ years',100)">
+        <div class="level-emoji">🏆</div>
+        <div class="level-name">Senior</div>
+        <div class="level-yrs">6+ years</div>
+        <div class="level-bar"><div class="level-fill" style="width:100%"></div></div>
+      </div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-prev" onclick="goStep(1)"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Back</button>
+      <button class="btn-next" id="next-2" onclick="goStep(3)" disabled>Continue <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+  </div>
+
+  <!-- STEP 3: SKILLS -->
+  <div class="panel" id="panel-3">
+    <div class="panel-head">
+      <div class="panel-eyebrow">Step 3 of 5</div>
+      <h2 class="panel-title">Pick your key skills</h2>
+      <p class="panel-sub">Select up to 6 skills. The AI will weight questions toward these areas.</p>
+    </div>
+    <input class="skills-search" id="skill-search" placeholder="Search skills…" oninput="filterSkills(this.value)">
+    <div class="skills-pool" id="skills-pool"></div>
+    <div class="skills-count">Selected: <span id="skill-count">0</span> / 6</div>
+    <div class="nav-btns">
+      <button class="btn-prev" onclick="goStep(2)"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Back</button>
+      <button class="btn-next" id="next-3" onclick="goStep(4)" disabled>Continue <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+  </div>
+
+  <!-- STEP 4: PREFERENCES -->
+  <div class="panel" id="panel-4">
+    <div class="panel-head">
+      <div class="panel-eyebrow">Step 4 of 5</div>
+      <h2 class="panel-title">Interview preferences</h2>
+      <p class="panel-sub">Customise the length and focus of your session.</p>
+    </div>
+    <div style="font-size:13px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.9px;margin-bottom:12px">Number of questions</div>
+    <div class="qcount-row">
+      <div class="qcount-btn selected" onclick="pickQ(this,3)"><div class="qcount-num">3</div><div class="qcount-label">Quick session</div><div class="qcount-time">~10 min</div></div>
+      <div class="qcount-btn" onclick="pickQ(this,5)"><div class="qcount-num">5</div><div class="qcount-label">Standard</div><div class="qcount-time">~20 min</div></div>
+      <div class="qcount-btn" onclick="pickQ(this,8)"><div class="qcount-num">8</div><div class="qcount-label">Full round</div><div class="qcount-time">~35 min</div></div>
+    </div>
+    <div class="field-divider"></div>
+    <div style="font-size:13px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.9px;margin-bottom:12px">Focus areas <span style="color:var(--text3);font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></div>
+    <div class="focus-row">
+      <div class="focus-chip" onclick="toggleFocus(this,'Technical Concepts')">Technical Concepts</div>
+      <div class="focus-chip" onclick="toggleFocus(this,'Behavioral / HR')">Behavioral / HR</div>
+      <div class="focus-chip" onclick="toggleFocus(this,'Problem Solving')">Problem Solving</div>
+      <div class="focus-chip" onclick="toggleFocus(this,'System Design')">System Design</div>
+      <div class="focus-chip" onclick="toggleFocus(this,'Case Studies')">Case Studies</div>
+      <div class="focus-chip" onclick="toggleFocus(this,'Situational')">Situational</div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-prev" onclick="goStep(3)"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Back</button>
+      <button class="btn-next" onclick="goStep(5)">Continue <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+  </div>
+
+  <!-- STEP 5: REVIEW -->
+  <div class="panel" id="panel-5">
+    <div class="panel-head">
+      <div class="panel-eyebrow">Step 5 of 5</div>
+      <h2 class="panel-title">Review & launch</h2>
+      <p class="panel-sub">Everything looks good? Hit generate to start your personalised AI interview.</p>
+    </div>
+    <div class="review-grid">
+      <div class="review-item"><div class="review-label">Target Role</div><div class="review-val" id="rv-role">—</div></div>
+      <div class="review-item"><div class="review-label">Experience Level</div><div class="review-val" id="rv-level">—</div></div>
+      <div class="review-item"><div class="review-label">Questions</div><div class="review-val" id="rv-q">—</div></div>
+      <div class="review-item"><div class="review-label">Focus Areas</div><div class="review-val" id="rv-focus">—</div></div>
+      <div class="review-item" style="grid-column:span 2"><div class="review-label">Skills</div><div class="review-val" id="rv-skills" style="flex-wrap:wrap;gap:6px">—</div></div>
+    </div>
+    <div style="background:rgba(79,127,255,.06);border:1px solid rgba(79,127,255,.15);border-radius:12px;padding:16px 18px;margin-bottom:24px;font-size:13px;color:var(--text2);line-height:1.6">
+      🤖 <strong style="color:var(--blue)">AI Interviewer</strong> will generate tailored questions based on your profile, progressively increasing in difficulty. You'll receive detailed feedback at the end.
+    </div>
+    <div class="nav-btns">
+      <button class="btn-prev" onclick="goStep(4)"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Back</button>
+      <button class="btn-next" onclick="launchInterview()" style="padding:14px 32px;font-size:15px">
+        ✨ Generate Interview
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<script>
+const SKILLS_BY_ROLE = {
+  'Software Engineer':['Python','Java','C++','Data Structures','Algorithms','System Design','SQL','Git','OOP','REST APIs','Multithreading','Dynamic Programming'],
+  'Data Analyst':['SQL','Python','Excel','Power BI','Tableau','Statistics','Data Visualization','ETL','Pandas','Numpy','Qlik Sense','Google Analytics'],
+  'Data Scientist':['Python','R','Machine Learning','Deep Learning','Statistics','TensorFlow','PyTorch','Pandas','NLP','Feature Engineering','A/B Testing','Data Viz'],
+  'Frontend Developer':['React','JavaScript','TypeScript','CSS/SCSS','HTML','Next.js','Testing','Webpack','Performance','Accessibility','Vue.js','GraphQL'],
+  'Backend Developer':['Node.js','Python','Java','SQL','NoSQL','REST APIs','Microservices','Docker','Redis','Message Queues','System Design','Security'],
+  'Product Manager':['Agile','Scrum','Roadmapping','User Research','Jira','OKRs','Stakeholder Mgmt','Wireframing','Analytics','A/B Testing','Prioritisation','GTM'],
+  'DevOps Engineer':['Docker','Kubernetes','CI/CD','Linux','AWS','GCP','Terraform','Ansible','Monitoring','Shell Scripting','Nginx','Security'],
+  'ML Engineer':['Python','TensorFlow','PyTorch','MLOps','SQL','System Design','Cloud','Math/Stats','Kubeflow','Feature Stores','Model Serving','Data Pipelines'],
+  'Full Stack Developer':['React','Node.js','MongoDB','SQL','REST APIs','Docker','TypeScript','GraphQL','AWS','Git','Testing','System Design'],
+};
+
+const state = { role:'', level:'', skills:[], qCount:3, focus:[] };
+let currentStep = 1;
+
+function goStep(n) {
+  document.getElementById('panel-'+currentStep).classList.remove('active');
+  const prev = document.getElementById('st-'+currentStep);
+  prev.classList.remove('active');
+  prev.classList.add('done');
+  if(n < currentStep) {
+    for(let i=n; i<=currentStep; i++){
+      document.getElementById('st-'+i).classList.remove('done','active');
+    }
+    document.getElementById('st-'+n).classList.add('active');
+  }
+  currentStep = n;
+  document.getElementById('panel-'+n).classList.add('active');
+  document.getElementById('st-'+n).classList.remove('done');
+  document.getElementById('st-'+n).classList.add('active');
+  for(let i=1;i<n;i++){
+    document.getElementById('st-'+i).classList.add('done');
+    if(document.getElementById('sl-'+i)) document.getElementById('sl-'+i).classList.add('done');
+  }
+  if(n===5) fillReview();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function pickRole(el, role) {
+  document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  state.role = role;
+  document.getElementById('next-1').disabled = false;
+  renderSkills(role);
+}
+
+function pickLevel(el, level, yrs, pct) {
+  document.querySelectorAll('.level-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  state.level = level;
+  document.getElementById('next-2').disabled = false;
+}
+
+function renderSkills(role) {
+  state.skills = [];
+  const pool = SKILLS_BY_ROLE[role] || SKILLS_BY_ROLE['Software Engineer'];
+  const el = document.getElementById('skills-pool');
+  el.innerHTML = pool.map(s=>`<div class="skill-chip" onclick="toggleSkill(this,'${s}')">${s}</div>`).join('');
+  document.getElementById('skill-count').textContent = '0';
+  document.getElementById('next-3').disabled = true;
+}
+
+function toggleSkill(el, skill) {
+  if(el.classList.contains('picked')){
+    el.classList.remove('picked');
+    state.skills = state.skills.filter(s=>s!==skill);
+  } else {
+    if(state.skills.length>=6) return;
+    el.classList.add('picked');
+    state.skills.push(skill);
+  }
+  document.getElementById('skill-count').textContent = state.skills.length;
+  document.getElementById('next-3').disabled = state.skills.length === 0;
+}
+
+function filterSkills(q) {
+  document.querySelectorAll('.skill-chip').forEach(c=>{
+    c.style.display = c.textContent.toLowerCase().includes(q.toLowerCase()) ? '' : 'none';
+  });
+}
+
+function pickQ(el, n) {
+  document.querySelectorAll('.qcount-btn').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  state.qCount = n;
+}
+
+function toggleFocus(el, f) {
+  el.classList.toggle('picked');
+  if(el.classList.contains('picked')) state.focus.push(f);
+  else state.focus = state.focus.filter(x=>x!==f);
+}
+
+function fillReview() {
+  document.getElementById('rv-role').textContent = state.role;
+  document.getElementById('rv-level').textContent = state.level;
+  document.getElementById('rv-q').textContent = state.qCount + ' questions';
+  document.getElementById('rv-focus').textContent = state.focus.length ? state.focus.join(', ') : 'All areas';
+  const sv = document.getElementById('rv-skills');
+  sv.innerHTML = state.skills.map(s=>`<span class="tag">${s}</span>`).join('');
+}
+
+async function launchInterview() {
+  try {
+
+    const numberOfQuestions = state.qCount;
+
+    const response = await fetch(
+      "http://localhost:5000/api/ai/generate",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          topic: `${state.role} - ${state.skills.join(", ")}`,
+          difficulty: state.level,
+          numberOfQuestions
+        })
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to generate questions");
+    }
+
+    const questions = await response.json();
+
+    sessionStorage.setItem(
+      "generatedQuestions",
+      JSON.stringify(questions)
+    );
+
+    sessionStorage.setItem(
+      "iaiSetup",
+      JSON.stringify(state)
+    );
+
+    window.location.href = "interview.html";
+
+  } catch (error) {
+    console.error(error);
+    alert("Failed to generate interview questions");
+  }
+}
+
+// init
+renderSkills('Software Engineer');
+</script>
+</body>
+</html>

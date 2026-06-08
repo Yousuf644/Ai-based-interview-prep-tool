@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InterviewAI — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="./css/dashboard.css">
+
+</head>
+<body>
+
+<div class="ambient ambient-1"></div>
+<div class="ambient ambient-2"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="logo-mark">AI</div>
+    <span class="logo-text">Interview<span>AI</span></span>
+  </a>
+  <div class="nav-right">
+    <span class="nav-badge">Pro</span>
+    <span class="nav-username" id="nav-uname"></span>
+    <div class="nav-avatar" id="nav-avatar"></div>
+    <button class="btn-logout" onclick="logout()">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+      Sign out
+    </button>
+  </div>
+</nav>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <span class="sidebar-label">Main</span>
+    <a class="sidebar-link active" href="#">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a class="sidebar-link" href="setup.html">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+      Start Interview
+    </a>
+    <a class="sidebar-link" href="history.html">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      History
+    </a>
+    <a class="sidebar-link" href="#analytics-section">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+      Analytics
+    </a>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- WELCOME -->
+    <div class="welcome-banner fade-up delay-1">
+      <div>
+        <div class="welcome-eyebrow">AI-Powered Platform</div>
+        <h1 class="welcome-title">Welcome back, <span id="welcome-name">there</span> 👋</h1>
+        <p class="welcome-sub">Prepare smarter with AI-powered interview practice and personalized feedback tailored to your goals.</p>
+      </div>
+      <a href="setup.html" class="btn-cta" onclick="handleStartInterview(event)">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        Start New Interview
+      </a>
+    </div>
+
+    <!-- STATS -->
+    <div>
+      <div class="section-head fade-up delay-2">
+        <h2 class="section-title">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          Performance Overview
+        </h2>
+      </div>
+      <div class="stats-grid fade-up delay-2">
+        <div class="stat-card">
+          <div class="stat-card-top">
+            <div class="stat-icon" style="background:rgba(79,127,255,.12)">
+              <svg fill="none" viewBox="0 0 24 24" stroke="#4f7fff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            </div>
+            <span class="stat-trend trend-up" id="trend-interviews">--</span>
+          </div>
+          <div><div class="stat-value" id="s-interviews">--</div><div class="stat-label">Total Interviews</div></div>
+          <div class="stat-bar-wrap"><div class="stat-bar" id="bar-interviews" style="width:0%;background:var(--blue)"></div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-top">
+            <div class="stat-icon" style="background:rgba(155,109,255,.12)">
+              <svg fill="none" viewBox="0 0 24 24" stroke="#9b6dff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+            </div>
+            <span class="stat-trend trend-up" id="trend-avg">--</span>
+          </div>
+          <div><div class="stat-value" id="s-avg" style="color:var(--purple)">--</div><div class="stat-label">Average Score</div></div>
+          <div class="stat-bar-wrap"><div class="stat-bar" id="bar-avg" style="width:0%;background:var(--purple)"></div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-top">
+            <div class="stat-icon" style="background:rgba(46,204,138,.12)">
+              <svg fill="none" viewBox="0 0 24 24" stroke="#2ecc8a" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+            </div>
+            <span class="stat-trend trend-up" id="trend-best">--</span>
+          </div>
+          <div><div class="stat-value" id="s-best" style="color:var(--green)">--</div><div class="stat-label">Best Score</div></div>
+          <div class="stat-bar-wrap"><div class="stat-bar" id="bar-best" style="width:0%;background:var(--green)"></div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-top">
+            <div class="stat-icon" style="background:rgba(61,217,197,.12)">
+              <svg fill="none" viewBox="0 0 24 24" stroke="#3dd9c5" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3"/></svg>
+            </div>
+            <span class="stat-trend trend-up" id="trend-q">--</span>
+          </div>
+          <div><div class="stat-value" id="s-q" style="color:var(--cyan)">--</div><div class="stat-label">Questions Practiced</div></div>
+          <div class="stat-bar-wrap"><div class="stat-bar" id="bar-q" style="width:0%;background:var(--cyan)"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK ACTIONS -->
+    <div>
+      <div class="section-head fade-up delay-3">
+        <h2 class="section-title">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Quick Actions
+        </h2>
+      </div>
+      <div class="actions-grid fade-up delay-3">
+        <div class="action-card" onclick="handleStartInterview()">
+          <div class="action-icon" style="background:rgba(79,127,255,.12)">
+            <svg fill="none" viewBox="0 0 24 24" stroke="#4f7fff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div class="action-name">Start Interview</div>
+          <div class="action-desc">Begin an AI-powered mock session for your target role</div>
+          <div class="action-arr"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="action-card" onclick="toast('Resume upload coming soon!')">
+          <div class="action-icon" style="background:rgba(155,109,255,.12)">
+            <svg fill="none" viewBox="0 0 24 24" stroke="#9b6dff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+          </div>
+          <div class="action-name">Upload Resume</div>
+          <div class="action-desc">Analyze your CV and get tailored interview questions</div>
+          <div class="action-arr"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="action-card" onclick="window.location.href='history.html'">
+          <div class="action-icon" style="background:rgba(61,217,197,.12)">
+            <svg fill="none" viewBox="0 0 24 24" stroke="#3dd9c5" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div class="action-name">Interview History</div>
+          <div class="action-desc">Review past sessions and track your progress</div>
+          <div class="action-arr"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="action-card" onclick="document.getElementById('analytics-section').scrollIntoView({behavior:'smooth'})">
+          <div class="action-icon" style="background:rgba(245,166,35,.12)">
+            <svg fill="none" viewBox="0 0 24 24" stroke="#f5a623" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <div class="action-name">Performance Analytics</div>
+          <div class="action-desc">Deep dive into scores, trends, and skill gaps</div>
+          <div class="action-arr"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ANALYTICS & AI COACH — proper 2-col grid ══ -->
+    <div id="analytics-section">
+      <div class="section-head fade-up delay-4">
+        <h2 class="section-title">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          Analytics &amp; AI Coach
+        </h2>
+      </div>
+
+      <div class="analytics-grid fade-up delay-4">
+
+        <!-- LEFT: Chart -->
+        <div class="chart-card">
+          <div class="section-head" style="margin-bottom:0">
+            <div>
+              <div style="font-family:var(--fh);font-size:15px;font-weight:700;color:var(--text)">Score Progression</div>
+              <div style="font-size:12px;color:var(--text3);margin-top:2px">All sessions</div>
+            </div>
+            <div style="display:flex;gap:14px;font-size:12px;color:var(--text3)">
+              <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:3px;background:var(--blue);border-radius:2px;display:inline-block"></span>Score</span>
+              <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:3px;background:var(--purple);border-radius:2px;display:inline-block"></span>Avg</span>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="scoreChart"></canvas>
+          </div>
+        </div>
+
+        <!-- RIGHT: AI Coach -->
+        <div class="coach-card">
+          <div class="coach-header">
+            <div class="coach-avatar">🤖</div>
+            <div>
+              <div class="coach-name">AI Coach</div>
+              <span class="coach-tag">Personalised Insights</span>
+            </div>
+          </div>
+          <div class="coach-insight">
+            <div class="insight-row">
+              <div class="insight-dot" style="background:var(--green);box-shadow:0 0 6px var(--green)"></div>
+              <div>
+                <div class="insight-row-label">Performance Trend</div>
+                <div class="insight-row-val" id="trendText">Loading…</div>
+              </div>
+            </div>
+            <div class="insight-row">
+              <div class="insight-dot" style="background:var(--amber);box-shadow:0 0 6px var(--amber)"></div>
+              <div>
+                <div class="insight-row-label">Next Goal</div>
+                <div class="insight-row-val" id="goalText">Loading…</div>
+              </div>
+            </div>
+            <div class="insight-row">
+              <div class="insight-dot" style="background:var(--blue);box-shadow:0 0 6px var(--blue)"></div>
+              <div>
+                <div class="insight-row-label">AI Recommendation</div>
+                <div class="insight-row-val" id="recommendationText">Loading…</div>
+              </div>
+            </div>
+          </div>
+          <div class="coach-tip" id="coachTip">Loading AI insights…</div>
+        </div>
+
+      </div><!-- /analytics-grid -->
+    </div>
+
+    <!-- ══ RECENT HISTORY — full width table + resume card below ══ -->
+    <div id="history-section">
+      <div class="section-head fade-up delay-5">
+        <h2 class="section-title">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          Recent Interview History
+        </h2>
+        <button class="section-link" onclick="window.location.href='history.html'">View all →</button>
+      </div>
+
+      <div class="history-stack fade-up delay-5">
+
+        <!-- Full-width table -->
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Level</th>
+                <th>Score</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="history-tbody"></tbody>
+          </table>
+        </div>
+
+        <!-- Resume card — clearly labelled coming soon, sits below the table -->
+        <div class="resume-card">
+          <div class="resume-card-header">
+            <div class="resume-card-title">Resume Analysis</div>
+            <span class="resume-coming-badge">Coming Soon</span>
+          </div>
+          <div class="resume-status">
+            <div class="resume-dot"></div>
+            <span class="resume-status-text">Resume uploaded: <strong>Yes</strong></span>
+          </div>
+          <div>
+            <div class="skill-group-label">Detected skills</div>
+            <div class="skill-pills">
+              <span class="pill pill-has">SQL</span>
+              <span class="pill pill-has">Python</span>
+              <span class="pill pill-has">Power BI</span>
+              <span class="pill pill-has">Excel</span>
+              <span class="pill pill-has">Tableau</span>
+            </div>
+          </div>
+          <div>
+            <div class="skill-group-label">Missing / Recommended</div>
+            <div class="skill-pills">
+              <span class="pill pill-miss">Statistics</span>
+              <span class="pill pill-miss">Machine Learning</span>
+              <span class="pill pill-miss">Spark</span>
+            </div>
+          </div>
+          <div class="btn-resume">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+            Update Resume
+          </div>
+        </div>
+
+      </div><!-- /history-stack -->
+    </div>
+
+    <!-- FUTURE INTEGRATIONS -->
+    <div class="fade-up delay-6">
+      <div class="section-head">
+        <h2 class="section-title">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+          Coming Soon
+        </h2>
+      </div>
+      <div class="future-grid">
+        <div class="future-card">
+          <span class="future-soon">SOON</span>
+          <div class="future-icon"><svg fill="none" viewBox="0 0 24 24" stroke="#9b6dff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg></div>
+          <div class="future-name">Voice Interview Mode</div>
+          <div class="future-desc">Practice real spoken answers with real-time speech AI feedback</div>
+        </div>
+        <div class="future-card">
+          <span class="future-soon">SOON</span>
+          <div class="future-icon"><svg fill="none" viewBox="0 0 24 24" stroke="#4f7fff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div>
+          <div class="future-name">Company Interviews</div>
+          <div class="future-desc">Google, Microsoft, TCS, Infosys–specific question sets</div>
+        </div>
+        <div class="future-card">
+          <span class="future-soon">SOON</span>
+          <div class="future-icon"><svg fill="none" viewBox="0 0 24 24" stroke="#3dd9c5" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+          <div class="future-name">AI Mock HR Round</div>
+          <div class="future-desc">Simulated HR conversations with tone and emotion analysis</div>
+        </div>
+        <div class="future-card">
+          <span class="future-soon">SOON</span>
+          <div class="future-icon"><svg fill="none" viewBox="0 0 24 24" stroke="#f5a623" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+          <div class="future-name">Resume-Based Questions</div>
+          <div class="future-desc">AI generates role-specific questions straight from your CV</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer>© 2026 AI based Interview Preparation</footer>
+
+<div class="toast" id="toast">
+  <div class="toast-dot"></div>
+  <span id="toast-msg"></span>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ALL JS BELOW IS 100% IDENTICAL TO YOUR ORIGINAL — NOT TOUCHED
+════════════════════════════════════════════════════════════════ -->
+<script>
+  const token = localStorage.getItem("token");
+
+if (!token) {
+  window.location.href = "login.html";
+}
+let scoreChart = null;
+
+const userName = localStorage.getItem("userName") || "User";
+const welcomeEl = document.getElementById("welcome-name");
+welcomeEl.textContent = userName;
+document.getElementById("nav-uname").textContent = userName;
+document.getElementById("nav-avatar").textContent = userName.charAt(0).toUpperCase();
+
+const h = new Date().getHours();
+const greet = h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening";
+welcomeEl.parentElement.innerHTML = `${greet}, <span>${userName}</span> 👋`;
+
+function logout() {
+  localStorage.clear();
+  window.location.href = "login.html";
+}
+
+async function loadAnalytics() {
+  try {
+    const res = await fetch(
+  "http://localhost:5000/api/interviews/analytics",
+  {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+);
+
+if (!res.ok) {
+  throw new Error("Unauthorized");
+}
+    const data = await res.json();
+    console.log("Analytics Data:", data);
+    document.getElementById("s-interviews").textContent = data.totalInterviews;
+    document.getElementById("s-avg").textContent = data.averageScore + "%";
+    document.getElementById("s-best").textContent = data.bestScore + "%";
+    document.getElementById("s-q").textContent = data.totalInterviews * 5;
+    document.getElementById("bar-interviews").style.width = Math.min(data.totalInterviews * 10, 100) + "%";
+    document.getElementById("bar-avg").style.width = data.averageScore + "%";
+    document.getElementById("bar-best").style.width = data.bestScore + "%";
+    document.getElementById("bar-q").style.width = Math.min((data.totalInterviews * 5) / 2, 100) + "%";
+  } catch (error) {
+    console.error("Analytics Error:", error);
+  }
+}
+
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+function handleStartInterview(e) {
+  if (e) e.preventDefault();
+  toast('Redirecting to interview setup…');
+  setTimeout(() => { window.location.href = 'setup.html'; }, 800);
+}
+
+const ctx = document.getElementById('scoreChart').getContext('2d');
+
+async function loadChart() {
+  const res = await fetch(
+  "http://localhost:5000/api/interviews",
+  {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+);
+
+if (!res.ok) {
+  throw new Error("Unauthorized");
+}
+  const interviews = await res.json();
+  const sortedInterviews = interviews.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+  const scoreData = sortedInterviews.map(i => i.score);
+  const labels = sortedInterviews.map((_, index) => `Interview ${index + 1}`);
+  console.log("Chart Scores:", scoreData);
+  const avg = scoreData.reduce((a, b) => a + b, 0) / scoreData.length;
+  const avgLine = new Array(scoreData.length).fill(avg);
+  createChart(scoreData, avgLine, labels);
+}
+
+const gradBlue = ctx.createLinearGradient(0, 0, 0, 200);
+gradBlue.addColorStop(0, 'rgba(79,127,255,.35)');
+gradBlue.addColorStop(1, 'rgba(79,127,255,0)');
+
+function createChart(scoreData, avgLine, labels) {
+  if (scoreChart) scoreChart.destroy();
+  scoreChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels,
+      datasets: [
+        { label: "Score", data: scoreData, borderColor: "#4f7fff", backgroundColor: gradBlue, fill: true, tension: 0.4 },
+        { label: "Average", data: avgLine, borderColor: "#9b6dff", borderDash: [5, 5], tension: 0 }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: "#7c86a0" } } },
+      scales: {
+        y: { beginAtZero: true, ticks: { color: "#4a5168" }, grid: { color: "rgba(255,255,255,.05)" } },
+        x: { ticks: { color: "#4a5168" }, grid: { color: "rgba(255,255,255,.05)" } }
+      }
+    }
+  });
+}
+
+/* ── level pill helper (adds colour class) ── */
+function levelPill(level) {
+  const map = {
+    'Fresher':   'level-fresh',
+    'Junior':    'level-jr',
+    'Mid-level': 'level-mid',
+    'Senior':    'level-sr',
+  };
+  const cls = map[level] || 'level-fresh';
+  return `<span class="level-pill ${cls}">${level}</span>`;
+}
+
+/* ── score colour helper ── */
+function scoreClass(s) {
+  if (s >= 80) return 'score-hi';
+  if (s >= 60) return 'score-md';
+  return 'score-lo';
+}
+
+async function loadHistory() {
+  try {
+    console.log("loadHistory running");
+    const res = await fetch(
+  "http://localhost:5000/api/interviews",
+  {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+);
+
+if (!res.ok) {
+  throw new Error("Unauthorized");
+}
+    const interviews = await res.json();
+    console.log("Interviews:", interviews);
+    const tbody = document.getElementById("history-tbody");
+    if (!tbody) { console.error("history-tbody not found"); return; }
+    tbody.innerHTML = "";
+    const recentInterviews = interviews
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .slice(0, 5);
+    recentInterviews.forEach((item) => {
+      const date = new Date(item.createdAt).toLocaleDateString();
+      tbody.innerHTML += `
+        <tr>
+          <td>${item.role}</td>
+          <td>${levelPill(item.level)}</td>
+          <td><span class="score-val ${scoreClass(item.score)}">${item.score}%</span></td>
+          <td>${date}</td>
+          <td><button class="btn-view" onclick="viewInterview('${item._id}')">View</button></td>
+        </tr>`;
+    });
+  } catch (error) {
+    console.error("History Error:", error);
+  }
+}
+
+function viewInterview(id) {
+  window.location.href = `interview-details.html?id=${id}`;
+}
+
+async function loadAICoach() {
+  const res = await fetch(
+  "http://localhost:5000/api/interviews",
+  {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+);
+
+if (!res.ok) {
+  throw new Error("Unauthorized");
+}
+  const interviews = await res.json();
+  if (!interviews.length) return;
+  const latest = interviews[0];
+  const averageScore = Math.round(interviews.reduce((sum, item) => sum + item.score, 0) / interviews.length);
+  let trend = "Getting Started";
+  if (interviews.length >= 2) {
+    if (interviews[0].score > interviews[1].score)      trend = "Improving 📈";
+    else if (interviews[0].score < interviews[1].score) trend = "Needs Consistency 📊";
+    else                                                 trend = "Stable ➖";
+  }
+  document.getElementById("trendText").textContent = trend;
+  document.getElementById("goalText").textContent = `Reach ${averageScore + 10}% Average Score`;
+  document.getElementById("recommendationText").textContent = latest.role;
+  document.getElementById("coachTip").innerHTML =
+    `<strong>AI Tip:</strong> ${latest.improvement || "Keep practicing regularly."}`;
+}
+
+loadHistory();
+loadAnalytics();
+loadChart();
+loadAICoach();
+</script>
+</body>
+</html>

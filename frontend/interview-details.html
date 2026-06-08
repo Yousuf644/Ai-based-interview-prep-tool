@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InterviewAI — Interview Details</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/interview-details.css">
+</head>
+<body>
+
+<div class="amb amb-1"></div>
+<div class="amb amb-2"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="dashboard.html">
+    <div class="logo-mark">AI</div>
+    <span class="logo-text">Interview<span>AI</span></span>
+  </a>
+  <div class="nav-right">
+    <a class="btn-back" href="dashboard.html">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+      <span>Dashboard</span>
+    </a>
+    <a class="btn-retry" href="setup.html">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+      New Interview
+    </a>
+  </div>
+</nav>
+
+<!-- HERO (populated by JS) -->
+<div class="page-hero" id="page-hero" style="display:none">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow" id="hero-eyebrow">Interview Details</div>
+      <h1 class="hero-title" id="hero-title">—</h1>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span id="hero-date">—</span>
+        </div>
+        <div class="hero-meta-item">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <span id="hero-level">—</span>
+        </div>
+        <div class="hero-meta-item">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+          <span id="hero-qcount">—</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="score-hero-badge" id="score-hero-badge">
+        <div class="score-hero-num" id="score-hero-num">—</div>
+        <div class="score-hero-label" id="score-hero-label">Overall Score</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- SKELETON -->
+  <div class="skeleton-screen" id="skeleton">
+    <div class="skel skel-hero"></div>
+    <div class="skel-top">
+      <div class="skel skel-card"></div>
+      <div class="skel skel-card"></div>
+    </div>
+    <div class="skel skel-section"></div>
+    <div class="skel skel-improve"></div>
+  </div>
+
+  <!-- ERROR -->
+  <div class="error-state" id="error-state" style="display:none">
+    <div class="error-icon">🔍</div>
+    <div class="error-title">Interview not found</div>
+    <div class="error-sub">We couldn't load this interview session. It may have been deleted or the ID is invalid.</div>
+    <div class="error-code" id="error-code"></div>
+    <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;justify-content:center">
+      <a class="btn-cta" href="dashboard.html">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        Go to Dashboard
+      </a>
+      <button class="btn-ghost-lg" onclick="window.location.reload()">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        Retry
+      </button>
+    </div>
+  </div>
+
+  <!-- CONTENT (hidden until data loads) -->
+  <div id="content" style="display:none">
+
+    <!-- TOP GRID: PERFORMANCE + DETAILS -->
+    <div class="top-grid">
+
+      <!-- PERFORMANCE CARD -->
+      <div class="card fade-up d1" id="perf-card">
+        <div class="card-header">
+          <div class="card-title">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            Performance Summary
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="perf-inner">
+            <div class="ring-wrap">
+              <svg width="110" height="110" viewBox="0 0 110 110">
+                <circle cx="55" cy="55" r="46" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="9"/>
+                <circle cx="55" cy="55" r="46" fill="none" id="score-arc"
+                  stroke="#4f7fff" stroke-width="9" stroke-linecap="round"
+                  stroke-dasharray="289" stroke-dashoffset="289"
+                  style="transition: stroke-dashoffset 1.3s cubic-bezier(.25,.46,.45,.94)"/>
+              </svg>
+              <div class="ring-score" id="ring-score">—</div>
+            </div>
+            <div class="perf-text">
+              <div class="perf-label" id="perf-label">—</div>
+              <div class="perf-desc" id="perf-desc">—</div>
+              <div class="perf-divider"></div>
+              <div class="perf-stat-row">
+                <div class="perf-stat">
+                  <div class="perf-stat-val" id="stat-answered">—</div>
+                  <div class="perf-stat-lbl">Answered</div>
+                </div>
+                <div class="perf-stat">
+                  <div class="perf-stat-val" id="stat-skipped">—</div>
+                  <div class="perf-stat-lbl">Skipped</div>
+                </div>
+                <div class="perf-stat">
+                  <div class="perf-stat-val" id="stat-avgrating">—</div>
+                  <div class="perf-stat-lbl">Avg Rating</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERVIEW DETAILS CARD -->
+      <div class="card fade-up d2">
+        <div class="card-header">
+          <div class="card-title">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            Interview Details
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="detail-rows">
+            <div class="detail-row">
+              <div class="detail-icon" style="background:rgba(79,127,255,.1)">
+                <svg fill="none" viewBox="0 0 24 24" stroke="#4f7fff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div>
+                <div class="detail-lbl">Role</div>
+                <div class="detail-val" id="det-role">—</div>
+              </div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-icon" style="background:rgba(155,109,255,.1)">
+                <svg fill="none" viewBox="0 0 24 24" stroke="#9b6dff" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <div>
+                <div class="detail-lbl">Experience Level</div>
+                <div class="detail-val" id="det-level">—</div>
+              </div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-icon" style="background:rgba(61,217,197,.1)">
+                <svg fill="none" viewBox="0 0 24 24" stroke="#3dd9c5" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+              </div>
+              <div>
+                <div class="detail-lbl">Skills Assessed</div>
+                <div class="skill-pills" id="det-skills"></div>
+              </div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-icon" style="background:rgba(245,166,35,.1)">
+                <svg fill="none" viewBox="0 0 24 24" stroke="#f5a623" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <div>
+                <div class="detail-lbl">Date</div>
+                <div class="detail-val" id="det-date">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q & A SECTION -->
+    <div class="card fade-up d3">
+      <div class="card-header">
+        <div class="card-title">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+          Questions &amp; Answers
+        </div>
+        <span id="qa-count-badge" style="font-size:12px;color:var(--text3);font-weight:600"></span>
+      </div>
+      <div class="card-body">
+        <div class="qa-list" id="qa-list"></div>
+      </div>
+    </div>
+
+    <!-- IMPROVEMENT CARD -->
+    <div class="improve-card fade-up d4">
+      <div class="improve-header">
+        <div class="improve-avatar">🤖</div>
+        <div>
+          <div class="improve-heading">AI Coach Recommendations</div>
+          <div class="improve-subheading">Personalised improvement plan</div>
+        </div>
+      </div>
+      <div class="improve-body">
+        <div class="improve-text" id="improve-text">—</div>
+        <div class="improve-points" id="improve-points"></div>
+      </div>
+    </div>
+
+    <!-- CTA ROW -->
+    <div class="cta-row fade-up d5">
+      <a class="btn-cta" href="setup.html">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        Practice Again
+      </a>
+      <a class="btn-ghost-lg" href="dashboard.html">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        Back to Dashboard
+      </a>
+    </div>
+
+  </div><!-- /content -->
+
+</main>
+
+<script>
+/* ── HELPERS ──────────────────────────────────────────────────────────── */
+function scoreClass(s) {
+  if (s >= 71) return 'green';
+  if (s >= 41) return 'amber';
+  return 'red';
+}
+function scoreColorVar(s) {
+  if (s >= 71) return 'var(--green)';
+  if (s >= 41) return 'var(--amber)';
+  return 'var(--red)';
+}
+function fmtDate(d) {
+  if (!d) return '—';
+  const dt = new Date(d);
+  if (isNaN(dt)) return d;
+  return dt.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+function stars(n, max = 5) {
+  const filled = `<svg class="star" style="color:var(--amber)" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>`;
+  const empty  = `<svg class="star" style="color:var(--text3)" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>`;
+  return Array.from({ length: max }, (_, i) => i < n ? filled : empty).join('');
+}
+
+/* ── PARSE IMPROVEMENT INTO BULLET POINTS ─────────────────────────────── */
+function parseImprovement(text) {
+  if (!text) return [];
+  // split by sentence-ending or newlines, filter short
+  const raw = text.replace(/\n+/g, ' ').trim();
+  const sentences = raw.match(/[^.!?]+[.!?]+/g) || [raw];
+  return sentences.map(s => s.trim()).filter(s => s.length > 20);
+}
+
+/* ── RENDER ───────────────────────────────────────────────────────────── */
+function render(d) {
+  const sc   = d.score ?? 0;
+  const cls  = scoreClass(sc);
+  const col  = scoreColorVar(sc);
+  const circ = 289;
+  const offset = circ - (circ * sc / 100);
+
+  /* hero */
+  document.getElementById('page-hero').style.display  = '';
+  document.getElementById('hero-eyebrow').textContent = 'Interview Details';
+  document.getElementById('hero-title').textContent   = d.role || 'Interview';
+  document.getElementById('hero-date').textContent    = fmtDate(d.createdAt);
+  document.getElementById('hero-level').textContent   = d.level || '—';
+  document.getElementById('hero-qcount').textContent  = `${(d.answered||[]).length} question${(d.answered||[]).length!==1?'s':''}`;
+  const snb = document.getElementById('score-hero-num');
+  snb.textContent   = sc + '%';
+  snb.className     = 'score-hero-num score-' + cls;
+  const badge = document.getElementById('score-hero-badge');
+  badge.classList.add('border-' + cls, 'glow-' + cls);
+  document.getElementById('score-hero-label').textContent = d.label || 'Score';
+
+  /* ring */
+  const arc = document.getElementById('score-arc');
+  arc.className = 'arc-' + cls;
+  setTimeout(() => { arc.style.strokeDashoffset = offset; }, 250);
+  const rs = document.getElementById('ring-score');
+  rs.textContent = sc + '%';
+  rs.className   = 'ring-score score-' + cls;
+
+  /* perf card */
+  const pl = document.getElementById('perf-label');
+  pl.textContent = d.label || '—';
+  pl.style.color = col;
+  document.getElementById('perf-desc').textContent = d.description || '—';
+  const answered = (d.answered || []).filter(a => a.a && a.a !== '[Skipped]').length;
+  const skipped  = (d.answered || []).length - answered;
+  const ratings  = (d.feedback || []).map(f => f.rating || 0);
+  const avgRating = ratings.length ? (ratings.reduce((a,b) => a+b, 0) / ratings.length).toFixed(1) : '—';
+  document.getElementById('stat-answered').textContent  = answered;
+  document.getElementById('stat-skipped').textContent   = skipped;
+  document.getElementById('stat-avgrating').textContent = avgRating + (avgRating !== '—' ? '/5' : '');
+  document.getElementById('stat-answered').style.color  = col;
+
+  /* details card */
+  document.getElementById('det-role').textContent  = d.role  || '—';
+  document.getElementById('det-level').textContent = d.level || '—';
+  document.getElementById('det-date').textContent  = fmtDate(d.createdAt);
+  const skillsEl = document.getElementById('det-skills');
+  skillsEl.innerHTML = (d.skills || []).map(s => `<span class="skill-pill">${s}</span>`).join('') || '<span style="color:var(--text3);font-size:13px">None specified</span>';
+
+  /* Q&A */
+  const qaList = document.getElementById('qa-list');
+  const total  = (d.answered || []).length;
+  document.getElementById('qa-count-badge').textContent = `${total} question${total !== 1 ? 's' : ''}`;
+
+  qaList.innerHTML = (d.answered || []).map((item, idx) => {
+    const fb  = (d.feedback || []).find(f => (f.qnum - 1) === idx) || {};
+    const rat = fb.rating || 0;
+    const isSkipped = !item.a || item.a === '[Skipped]';
+    return `
+    <div class="qa-item" id="qa-${idx}">
+      <button class="qa-toggle" onclick="toggleQA(${idx})" aria-expanded="false">
+        <div class="qa-num">${idx + 1}</div>
+        <div class="qa-toggle-right">
+          <div class="qa-q">${item.q || 'Question ' + (idx + 1)}</div>
+          <div class="qa-meta">
+            <div class="qa-rating-badge">
+              ★ ${rat}/5
+            </div>
+            <svg class="chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </div>
+      </button>
+      <div class="qa-body">
+        <div class="qa-answer-label">Your Answer</div>
+        <div class="qa-answer-text">${isSkipped ? '<em style="color:var(--text3)">You skipped this question.</em>' : (item.a || '—')}</div>
+        <div class="stars" style="margin-bottom:12px">${stars(rat)}</div>
+        ${fb.strength ? `
+        <div class="qa-feedback-row">
+          <div class="qa-feedback-dot" style="background:var(--green);box-shadow:0 0 6px var(--green)"></div>
+          <div class="qa-feedback-txt">
+            <div class="lbl" style="color:var(--green)">Strength</div>
+            ${fb.strength}
+          </div>
+        </div>` : ''}
+        ${fb.weakness ? `
+        <div class="qa-feedback-row">
+          <div class="qa-feedback-dot" style="background:var(--amber);box-shadow:0 0 6px var(--amber)"></div>
+          <div class="qa-feedback-txt">
+            <div class="lbl" style="color:var(--amber)">To Improve</div>
+            ${fb.weakness}
+          </div>
+        </div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+
+  /* improvement */
+  document.getElementById('improve-text').textContent = d.improvement || 'Great effort! Keep practising consistently.';
+  const points = parseImprovement(d.improvement || '');
+  const pEl = document.getElementById('improve-points');
+  if (points.length > 1) {
+    pEl.innerHTML = points.map(p => `
+      <div class="improve-point">
+        <div class="improve-point-dot"></div>
+        <span>${p}</span>
+      </div>`).join('');
+    document.getElementById('improve-text').style.display = 'none';
+  }
+
+  /* show everything */
+  document.getElementById('skeleton').style.display = 'none';
+  document.getElementById('content').style.display  = 'flex';
+  document.getElementById('content').style.flexDirection = 'column';
+  document.getElementById('content').style.gap = '24px';
+}
+
+/* ── TOGGLE Q&A ───────────────────────────────────────────────────────── */
+function toggleQA(idx) {
+  const item = document.getElementById('qa-' + idx);
+  const btn  = item.querySelector('.qa-toggle');
+  const open = item.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open);
+}
+
+/* ── SHOW ERROR ───────────────────────────────────────────────────────── */
+function showError(msg) {
+  document.getElementById('skeleton').style.display    = 'none';
+  document.getElementById('error-state').style.display = 'flex';
+  document.getElementById('error-code').textContent    = msg || 'Unknown error';
+}
+
+/* ── FETCH ────────────────────────────────────────────────────────────── */
+async function loadInterview() {
+  const params      = new URLSearchParams(window.location.search);
+  const interviewId = params.get('id');
+
+  if (!interviewId) {
+    showError('No interview ID provided in URL. Expected: ?id=<mongo_id>');
+    return;
+  }
+
+  try {
+   const token = localStorage.getItem("token");
+
+
+if (!token) {
+  window.location.href = "login.html";
+  return;
+}
+const res = await fetch(
+  `http://localhost:5000/api/interviews/${interviewId}`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+);
+
+    if (res.status === 404) { showError(`Interview ID "${interviewId}" not found.`); return; }
+    if (!res.ok)            { showError(`Server returned ${res.status} ${res.statusText}`); return; }
+
+    const json = await res.json();
+    /* support both { data: {...} } wrapper and flat document */
+    const doc  = json.data || json;
+    render(doc);
+
+  } catch (err) {
+    /* Network / CORS / JSON parse errors */
+    if (err instanceof TypeError && err.message.includes('fetch')) {
+      showError('Cannot reach http://localhost:5000 — is your Flask server running?');
+    } else {
+      showError(err.message || 'Unexpected error');
+    }
+  }
+}
+
+loadInterview();
+</script>
+</body>
+</html>
