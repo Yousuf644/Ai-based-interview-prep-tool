@@ -2,6 +2,10 @@ import dotenv from "dotenv";
 import Interview from "../models/Interview.js";
 dotenv.config();
 
+console.log(
+  "OPENROUTER KEY EXISTS:",
+  !!process.env.OPENROUTER_API_KEY
+); 
 export const generateAIQuestion = async (req, res) => {
   try {
     const {
