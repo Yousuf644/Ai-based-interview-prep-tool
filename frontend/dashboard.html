@@ -374,7 +374,7 @@ function logout() {
 async function loadAnalytics() {
   try {
     const res = await fetch(
-  "http://localhost:5000/api/interviews/analytics",
+  "https://ai-based-interview-prep-tool.onrender.com/api/interviews/analytics",
   {
     headers: {
       Authorization: `Bearer ${token}`
@@ -419,7 +419,7 @@ const ctx = document.getElementById('scoreChart').getContext('2d');
 
 async function loadChart() {
   const res = await fetch(
-  "http://localhost:5000/api/interviews",
+  "https://ai-based-interview-prep-tool.onrender.com/api/interviews",
   {
     headers: {
       Authorization: `Bearer ${token}`
@@ -490,7 +490,7 @@ async function loadHistory() {
   try {
     console.log("loadHistory running");
     const res = await fetch(
-  "http://localhost:5000/api/interviews",
+  "https://ai-based-interview-prep-tool.onrender.com/api/interviews",
   {
     headers: {
       Authorization: `Bearer ${token}`
@@ -531,7 +531,7 @@ function viewInterview(id) {
 
 async function loadAICoach() {
   const res = await fetch(
-  "http://localhost:5000/api/interviews",
+  "https://ai-based-interview-prep-tool.onrender.com/api/interviews",
   {
     headers: {
       Authorization: `Bearer ${token}`

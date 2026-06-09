@@ -424,7 +424,7 @@ if (!token) {
   return;
 }
 const res = await fetch(
-  `http://localhost:5000/api/interviews/${interviewId}`,
+ `https://ai-based-interview-prep-tool.onrender.com/api/interviews/${interviewId}`,
   {
     headers: {
       Authorization: `Bearer ${token}`
@@ -443,7 +443,7 @@ const res = await fetch(
   } catch (err) {
     /* Network / CORS / JSON parse errors */
     if (err instanceof TypeError && err.message.includes('fetch')) {
-      showError('Cannot reach http://localhost:5000 — is your Flask server running?');
+      showError('Cannot reach https://ai-based-interview-prep-tool.onrender.com — is your Flask server running?');
     } else {
       showError(err.message || 'Unexpected error');
     }

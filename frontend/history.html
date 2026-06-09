@@ -334,7 +334,7 @@ async function loadHistory() {
     const token = localStorage.getItem('token');
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-    const res = await fetch('http://localhost:5000/api/interviews', { headers });
+    const res = await fetch('https://ai-based-interview-prep-tool.onrender.com/api/interviews', { headers });
     if (!res.ok) throw new Error(`Server error ${res.status}`);
     const json = await res.json();
     allData = Array.isArray(json) ? json : (json.data || json.interviews || []);
@@ -525,7 +525,7 @@ async function confirmDelete() {
     const token = localStorage.getItem('token');
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-    const res = await fetch(`http://localhost:5000/api/interviews/${deleteId}`, {
+    const res = await fetch(`https://ai-based-interview-prep-tool.onrender.com/api/interviews/${deleteId}`, {
       method: 'DELETE',
       headers,
     });
